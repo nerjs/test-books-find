@@ -21,3 +21,9 @@ services:
       - db
     ports:
       - 8080:8080 
+
+  redis:
+    image: redis 
+    restart: always 
+    ports: 
+      - 6378:6379

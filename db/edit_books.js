@@ -12,7 +12,7 @@ module.exports = async ({
     image
 }) => {
 
-    const [ book ] = await asyncQuery('SELECT * FROM books WHERE ??=? LIMIT 1', ['id', id])
+    const [ book ] = await asyncQuery('SELECT * FROM books WHERE ??=? LIMIT 1', ['id', id], true)
 
     if (!book) throw new RestError(404, {}, 'Book not found')
 
@@ -23,7 +23,7 @@ module.exports = async ({
         description,
         author, 
         image
-    }, 'id', id])
+    }, 'id', id], false, true)
 
 
     

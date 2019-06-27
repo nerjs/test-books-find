@@ -1,9 +1,9 @@
 require('dotenv').config()
 const Koa = require('koa');
 const koaBody = require('koa-body');
-const json = require('koa-json')
 const routes = require('./routes')
 const errorMdw = require('./utils/error_mdw')
+const { readyCache } = require('./db/cache')
 const app = new Koa();
 
 // response
@@ -27,7 +27,14 @@ app
 //     ctx.status = 404;
 // })
 
-app.listen(process.env.HTTP_PORT, err => {
-    if (err) return console.error(err)
-    console.log(`Started http://localhost:${process.env.HTTP_PORT}`)
-});
+(async() => {
+  await readyCache()
+
+  console.log('Cache ready!')
+
+  app.listen(process.env.HTTP_PORT, err => {
+      if (err) return console.error(err)
+      console.log(`Started http://localhost:${process.env.HTTP_PORT}`)
+  });
+})()
+

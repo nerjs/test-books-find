@@ -1,3 +1,4 @@
+const moment = require('moment')
 const asyncQuery = require('./async_query')
 const getCount = require('./get_count')
 
@@ -37,21 +38,19 @@ module.exports = async ({
     } 
 
     if (from) {
-        d = new Date(from)
-        if (d.getTime() > 0) {
-            where.push(`?? >= ?? `)
-            insert.push('date')
-            insert.push(d)
-        }
+        console.log('11111111111')
+        console.log((new Date(from)))
+        console.log(moment(from))
+        console.log(moment(from).format('YYYY-MM-DD hh:mm:ss'))
+        where.push(`?? >= ? `)
+        insert.push('date')
+        insert.push(moment(from).format('YYYY-MM-DD hh:mm:ss'))
     }
 
     if (to) {
-        d = new Date(to)
-        if (d.getTime() > 0) {
-            where.push(`?? <= ??`)
-            insert.push('date')
-            insert.push(d)
-        }
+        where.push(`?? <= ?`)
+        insert.push('date')
+        insert.push(moment(to).format('YYYY-MM-DD hh:mm:ss'))
     }
 
     if (where.length > 0) {
@@ -72,9 +71,10 @@ module.exports = async ({
 
     const sql = `SELECT * FROM books ${where} ${orderSql} ${limit};`
 
+    console.log(require('mysql').format(sql, insert))
 
     const res = {
-       result: await asyncQuery(sql, insert),
+       result: await asyncQuery(sql, insert, true),
        all: await getCount()
     } 
 
