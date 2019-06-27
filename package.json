@@ -1,0 +1,29 @@
+{
+  "name": "books-list",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "db:up": "docker-compose up",
+    "db:down": "docker-compose down",
+    "db:rows": "node ./scripts/add_books",
+    "start": "nodemon .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.0.0",
+    "faker": "^4.1.0",
+    "koa": "^2.7.0",
+    "koa-body": "^4.1.0",
+    "koa-json": "^2.0.2",
+    "koa-router": "^7.4.0",
+    "merge": "^1.2.1",
+    "moment": "^2.24.0",
+    "mysql": "^2.17.1",
+    "nodemon": "^1.19.1",
+    "yup": "^0.27.0"
+  }
+}
