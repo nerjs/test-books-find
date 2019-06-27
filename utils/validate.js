@@ -44,7 +44,6 @@ exports.toThrow = async (schema, props) => {
             abortEarly: false
         })
     } catch(e) {
-        // console.dir(e, { depth: 4 })
         throw new RestError(400, {
             type: 'validation_error',
             fields: e.inner && Array.isArray(e.inner) ? e.inner.reduce((prev, item) => {

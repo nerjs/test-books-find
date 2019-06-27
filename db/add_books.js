@@ -17,7 +17,7 @@ module.exports = async ({
         image
     }, true)
 
-    const result = await asyncQuery('SELECT * FROM books WHERE ??=? LIMIT 1', ['id', insertId], false, true)
+    const result = await asyncQuery('SELECT * FROM books WHERE ??=? LIMIT 1;', ['id', insertId], false, true)
     
     return {
         result: result[0],

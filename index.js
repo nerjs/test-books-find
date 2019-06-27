@@ -7,14 +7,12 @@ const { readyCache } = require('./db/cache')
 const { readyPool } = require('./db/pool')
 const app = new Koa();
 
-// response
+
 
 
 app.use(errorMdw)
 
 
-
-// app.use(json())
 app.use(koaBody());
 
 app
@@ -24,9 +22,6 @@ app
   })); 
 
 
-// app.use(async ctx => {
-//     ctx.status = 404;
-// })
 
 (async() => {
 

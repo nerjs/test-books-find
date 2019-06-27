@@ -21,7 +21,6 @@ module.exports = async (ctx, next) => {
             }
 
             ctx.body = { error }
-            console.log(ctx)
         } else {
             ctx.body = err.message
         }
