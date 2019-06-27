@@ -4,6 +4,7 @@ const koaBody = require('koa-body');
 const routes = require('./routes')
 const errorMdw = require('./utils/error_mdw')
 const { readyCache } = require('./db/cache')
+const { readyPool } = require('./db/pool')
 const app = new Koa();
 
 // response
@@ -28,9 +29,13 @@ app
 // })
 
 (async() => {
-  await readyCache()
 
-  console.log('Cache ready!')
+  await Promise.all([
+    readyCache(),
+    readyPool()
+  ])
+
+  console.log('DB/Cache ready')
 
   app.listen(process.env.HTTP_PORT, err => {
       if (err) return console.error(err)

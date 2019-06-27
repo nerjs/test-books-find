@@ -8,8 +8,7 @@ const {
     DB_PORT,
     DB_USER,
     DB_PASSWORD,
-    DB_NAME,
-    COUNT_TEST_ROWS
+    DB_NAME
 } = process.env 
 
 
@@ -25,3 +24,12 @@ const pool = mysql.createPool({
 
 
 module.exports = pool 
+
+module.exports.readyPool = () => new Promise((resolve, reject) => {
+    pool.getConnection((err, conn) => {
+        if (err) return reject(err)
+        resolve()
+        conn.release()
+    })
+})
+
